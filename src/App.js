@@ -1,6 +1,6 @@
 import React from "react";
 import AgentList from "./AgentList";
-import Add from "./Add";
+import Add from "./Form";
 import Heading from "./Heading";
 import "./bootstrap.min.css";
 
@@ -9,7 +9,6 @@ function App() {
     <div className="container">
       <div class="row">
         <div class="col">
-        <Heading text="> Agents" />
         <AgentList />
         </div>
       </div>

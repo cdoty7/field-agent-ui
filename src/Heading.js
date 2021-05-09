@@ -4,4 +4,4 @@ const Heading = ({ text }) => {
     )
 }
 
-export default Heading
+export default Heading;

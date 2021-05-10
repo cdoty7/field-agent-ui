@@ -83,4 +83,4 @@ const Edit = ({ agents, onAdd }) => {
   );
 };
 
-export default Add;
+export default Edit;

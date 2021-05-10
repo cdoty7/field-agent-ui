@@ -1,7 +1,5 @@
 import React from "react";
 import AgentList from "./AgentList";
-import Add from "./Form";
-import Heading from "./Heading";
 import "./bootstrap.min.css";
 
 function App() {

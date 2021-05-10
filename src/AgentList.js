@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import Button from "./Button";
 import Heading from "./Heading";
-import Form from "./Add";
+import Add from "./Add";
+import Edit from "./Edit"
 
 const AgentList = () => {
   const [agents, setAgents] = useState([]);
@@ -56,7 +57,7 @@ const AgentList = () => {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
-      body: JSON.stringify(newCapsule)
+      body: JSON.stringify()
     };
   
     fetch("http://localhost:8080/api", init)
@@ -119,11 +120,11 @@ const deleteAgent = (agentId) => {
       <div className="row">
         <div className="col-6">
           <Heading text="> Add Agent" />
-          <Form onAdd={addAgent} />
+          <Add onAdd={addAgent} />
         </div>  
         <div className="col-6">  
           <Heading text="> Edit Agent" />
-          <Form onAdd={editAgent} />
+          <Edit onAdd={editAgent} />
         </div>  
       </div>
     </div>

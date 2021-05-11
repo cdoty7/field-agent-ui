@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Button from "./Button";
+import Agent from "./Agent";
 import Heading from "./Heading";
 import Add from "./Add";
 import Edit from "./Edit"
@@ -69,23 +69,6 @@ const AgentList = () => {
       .then(getAgents()) 
   };
 
-
-  //delete
-const deleteAgent = (agentId) => {
-  fetch(`http://localhost:8080/api/agent/${agentId}`, { method: "DELETE" })
-  .then(response => {
-      if (response.status === 204) {
-          setAgents(agents.filter(a => a.agentId !== agentId));
-      } else if (response.status === 404) {
-          return Promise.reject("Agent not found");
-      } else {
-          return Promise.reject(`Delete failed with status: ${response.status}`);
-      }
-  })
-  .catch(console.log);
-  getAgents();
-};
-
   return (
     <div>
       <Heading text="> Agents" />
@@ -102,18 +85,8 @@ const deleteAgent = (agentId) => {
           </tr>
         </thead>
         <tbody>
-          {agents.map((a) => (
-            <tr key={a.agentId}>
-              <td>{a.agentId}</td>
-              <td>{a.firstName}</td>
-              <td>{a.middleName}</td>
-              <td>{a.lastName}</td>
-              <td>{a.dob}</td>
-              <td>{a.heightInInches}</td>
-              <td>
-                <Button text="Edit" /> <Button text="Delete" onClick={() => deleteAgent(a.agentId)}/>
-              </td>
-            </tr>
+          {agents.map((agent) => (
+            <Agent agent={agent} />
           ))}
         </tbody>
       </table>

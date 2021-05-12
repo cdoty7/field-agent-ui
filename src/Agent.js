@@ -1,34 +1,37 @@
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
-const Agent = ({ agent }) => {
-  //delete
-  const deleteAgent = ({ agentId })  => {
-    fetch(`http://localhost:8080/api/agent/${agentId}`, { method: "DELETE" })
-      .then((response) => {
-        if (response.status === 204) {
-          setAgents(agents.filter((a) => a.agentId !== agentId));
-        } else if (response.status === 404) {
-          return Promise.reject("Agent not found");
-        } else {
-          return Promise.reject(
-            `Delete failed with status: ${response.status}`
-          );
-        }
-      })
-      .catch(console.log);
-  };
+const Agent = ({ agentId, firstName, middleName, lastName, dob, heightInInches, removeAgent}) => {
+
+      //delete
+      const deleteAgent = ()  => {
+        fetch(`http://localhost:8080/api/agent/${agentId}`, { method: "DELETE" })
+          .then((response) => {
+            if (response.status === 204) {
+              removeAgent(agentId);
+            } else if (response.status === 404) {
+              return Promise.reject("Agent not found");
+            } else {
+              return Promise.reject(
+                `Delete failed with status: ${response.status}`
+              );
+            }
+          })
+          .catch(console.log);
+      };
+
 
   return (
-    <tr key={agent.agentId}>
-      <td>{agent.agentId}</td>
-      <td>{agent.firstName}</td>
-      <td>{agent.middleName}</td>
-      <td>{agent.lastName}</td>
-      <td>{agent.dob}</td>
-      <td>{agent.heightInInches}</td>
+    <tr key={agentId}>
+      <td>{agentId}</td>
+      <td>{firstName}</td>
+      <td>{middleName}</td>
+      <td>{lastName}</td>
+      <td>{dob}</td>
+      <td>{heightInInches}</td>
       <td>
-        <Button text="Edit" />{" "}
-        <Button text="Delete" onClick={() => deleteAgent(agent.agentId)} />
+        <Link to={`/edit/${agentId}`}><Button text="Edit" /></Link>
+        <Button text="Delete" onClick={() => deleteAgent(agentId)} />
       </td>
     </tr>
   );

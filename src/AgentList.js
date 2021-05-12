@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Agent from "./Agent";
 import Heading from "./Heading";
 import Add from "./Add";
-import Edit from "./Edit"
 
 const AgentList = () => {
   const [agents, setAgents] = useState([]);
@@ -48,26 +47,22 @@ const AgentList = () => {
       .catch(console.log);
   };
 
-  //edit
-  const editAgent = () => {
-    
-    const init = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify()
-    };
+  const removeAgent = (agentId) => {
+    let newAgents = [];
+
+    for (let i = 0; i < agents.length; i++) {
+      if (agents[i].agentId !== agentId) {
+        newAgents.push(agents[i]);
+      }
+    }
+
+    if (newAgents.length !== agents.length) {
+      setAgents(newAgents);
+    } 
+  }
+
+
   
-    fetch("http://localhost:8080/api", init)
-      .then(response => {
-        if (response.status !== 204) {
-          return Promise.reject("couldn't update");
-        }
-      })
-      .then(getAgents()) 
-  };
 
   return (
     <div>
@@ -86,21 +81,23 @@ const AgentList = () => {
         </thead>
         <tbody>
           {agents.map((agent) => (
-            <Agent agent={agent} />
+            <Agent key={agent.agentId}
+            agentId={agent.agentId} 
+            firstName={agent.firstName}
+            middleName={agent.middleName}
+            lastName={agent.lastName}
+            dob={agent.dob}
+            heightInInches={agent.heightInInches}
+            removeAgent={removeAgent}  
+            />
           ))}
         </tbody>
       </table>
       <div className="row">
-        <div className="col-6">
           <Heading text="> Add Agent" />
           <Add onAdd={addAgent} />
         </div>  
-        <div className="col-6">  
-          <Heading text="> Edit Agent" />
-          <Edit onAdd={editAgent} />
-        </div>  
       </div>
-    </div>
   );
   }
 

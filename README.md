@@ -1,3 +1,21 @@
+# Field Agent Security Plan
+
+**Total Time Est: 3:30**
+ - Complete routing 1:00
+    - Move add fetch to add component
+    - Add add to routing in App
+    - Implement add button on AgentList
+    - Implement 404 page
+    - Implement greeting page
+ - Refresher on how to implement security - 0:30
+ - Add login/logout/register link and display for username to AgentList 00:30
+- Implement login 1:00
+- Implement register 1:00
+- Bug fixes/polish 0:30
+
+
+
+
 # Field Agent UI Plan
 
 **Total Time Est: 8:15**

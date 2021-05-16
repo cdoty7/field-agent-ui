@@ -8,6 +8,7 @@ import Button from "./Button";
 const AgentList = () => {
   const [agents, setAgents] = useState([]);
   const auth = useContext(AuthContext);
+  const [user, setUser] = useState(null);
 
   //get agent list
   useEffect(() => {
@@ -40,6 +41,10 @@ const AgentList = () => {
     }
   };
 
+  const logout = () => {
+    setUser(null);
+  };
+
   return (
     <div>
       <Heading text="> Agents" />
@@ -53,7 +58,8 @@ const AgentList = () => {
             <th scope="col">Last Name</th>
             <th scope="col">Date of Birth</th>
             <th scope="col">Height</th>
-            <th scope="col"><Link to="/agents/add"><Button text="Add Agent" /></Link></th>
+            <th scope="col"><Link to="/agents/add"><Button text="Add Agent" /></Link>
+            <Button text="Logout" onClick={() => logout} /></th>
           </tr>
         </thead>
         <tbody>

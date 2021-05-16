@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
 import Agent from "./Agent";
 import Heading from "./Heading";
-import Add from "./Add";
 
 const AgentList = () => {
   const [agents, setAgents] = useState([]);
 
   //get agent list
-    useEffect(() => {
-      getAgents();
-    }, []);
+  useEffect(() => {
+    getAgents();
+  }, []);
 
-    const getAgents = () => {
-      fetch("http://localhost:8080/api/agent")
+  const getAgents = () => {
+    fetch("http://localhost:8080/api/agent")
       .then((response) => {
         if (response.status !== 200) {
           return Promise.reject("fetch failed");
@@ -20,30 +19,6 @@ const AgentList = () => {
         return response.json();
       })
       .then((json) => setAgents(json))
-      .catch(console.log);
-    };
-
-  //add
-  const addAgent = (agent) => {
-    const init = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(agent),
-    };
-
-    fetch("http://localhost:8080/api/agent", init)
-      .then((response) => {
-        if (response.status !== 201) {
-          return Promise.reject("response is not OK");
-        }
-        return response.json();
-      })
-      .then((json) => {
-        setAgents([...agents, json]);
-      })
       .catch(console.log);
   };
 
@@ -58,11 +33,8 @@ const AgentList = () => {
 
     if (newAgents.length !== agents.length) {
       setAgents(newAgents);
-    } 
-  }
-
-
-  
+    }
+  };
 
   return (
     <div>
@@ -81,24 +53,21 @@ const AgentList = () => {
         </thead>
         <tbody>
           {agents.map((agent) => (
-            <Agent key={agent.agentId}
-            agentId={agent.agentId} 
-            firstName={agent.firstName}
-            middleName={agent.middleName}
-            lastName={agent.lastName}
-            dob={agent.dob}
-            heightInInches={agent.heightInInches}
-            removeAgent={removeAgent}  
+            <Agent
+              key={agent.agentId}
+              agentId={agent.agentId}
+              firstName={agent.firstName}
+              middleName={agent.middleName}
+              lastName={agent.lastName}
+              dob={agent.dob}
+              heightInInches={agent.heightInInches}
+              removeAgent={removeAgent}
             />
           ))}
         </tbody>
       </table>
-      <div className="row">
-          <Heading text="> Add Agent" />
-          <Add onAdd={addAgent} />
-        </div>  
-      </div>
+    </div>
   );
-  }
+};
 
 export default AgentList;

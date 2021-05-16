@@ -4,7 +4,6 @@ import Button from "./Button";
 import Heading from "./Heading";
 
 const Edit = () => {
-  
   const defaultAgent = {
     agentId: 0,
     firstName: "",
@@ -16,7 +15,7 @@ const Edit = () => {
 
   const [agent, setAgent] = useState(defaultAgent);
   const { id } = useParams();
-  
+
   const [firstName, setFirstName] = useState(agent.firstName);
   const [middleName, setMiddleName] = useState(agent.middleName);
   const [lastName, setLastName] = useState(agent.lastName);
@@ -41,7 +40,8 @@ const Edit = () => {
       middleName: middleName.length > 0 ? middleName : agent.middleName,
       lastName: lastName.length > 0 ? lastName : agent.lastName,
       dob: dob.length > 0 ? dob : agent.dob,
-      heightInInches: heightInInches.length > 0 ? heightInInches: agent.heightInInches,
+      heightInInches:
+        heightInInches.length > 0 ? heightInInches : agent.heightInInches,
     };
 
     const init = {
@@ -61,7 +61,7 @@ const Edit = () => {
           return Promise.reject("couldn't update");
         }
       })
-      .then(history.push("/"))
+      .then(history.push("/agents"))
       .catch(console.log);
   };
 
@@ -121,8 +121,8 @@ const Edit = () => {
         />
         <button type="submit" className="btn btn-outline-light">
           Submit
-        </button>{" "}
-        <Button text="Cancel" />
+        </button>
+        <Button text="Cancel" onClick={() => history.push("/agents")} />
       </form>
     </>
   );

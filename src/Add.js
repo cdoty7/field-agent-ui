@@ -1,5 +1,7 @@
-import { useState, useHistory } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Button from "./Button";
+import Heading from "./Heading";
 
 const Add = () => {
   const [firstName, setFirstName] = useState("");
@@ -13,16 +15,21 @@ const Add = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    onAdd({ firstName, middleName, lastName, dob, heightInInches });
-
-    const addAgent = () => {
+    const newAgent = {
+      firstName: firstName,
+      middleName: middleName,
+      lastName: lastName,
+      dob: dob,
+      heightInInches: heightInInches,
+    };
+  
       const init = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(onAdd),
+        body: JSON.stringify(newAgent),
       };
 
       fetch("http://localhost:8080/api/agent", init)
@@ -34,11 +41,10 @@ const Add = () => {
         })
         .then(history.push("/agents"))
         .catch(console.log);
-    };
   };
 
   return (
-    <>
+    <div className="container">
       <Heading text="> Add Agent" />
       <form className="form-inline" onSubmit={onSubmit}>
         <label className="sr-only mb-2" htmlFor="firstName" required>
@@ -96,7 +102,7 @@ const Add = () => {
         </button>
         <Button text="Cancel" onClick={() => history.push("/agents")} />
       </form>
-    </>
+    </div>
   );
 };
 

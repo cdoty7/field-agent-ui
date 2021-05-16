@@ -1,5 +1,8 @@
 import { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import AuthContext from "./AuthContext";
+import Errors from "./Errors";
+import Heading from "./Heading";
 
 const Register = () => {
     const auth = useContext(AuthContext);
@@ -45,20 +48,20 @@ const Register = () => {
   
     return (
       <div>
-        <h2>Register</h2>
+        <Heading text="> Register" />
         <Errors errors={errors} />
         <form onSubmit={handleSubmit}>
         <div>
-            <label>Username:</label>
+            <label>Username</label>
             <input type="text" onChange={(event) => setUsername(event.target.value)} />
           </div>
           <div>
-            <label>Password:</label>
+            <label>Password</label>
             <input type="password" onChange={(event) => setPassword(event.target.value)} />
           </div>
           <div>
-            <button type="submit">Register</button>
-            <Link to={'/login'}>I already have an account</Link>
+            <button className="btn btn-outline-light" type="submit">Register</button>
+            <Link to={'/login'}>Login</Link>
           </div>
         </form>
       </div>

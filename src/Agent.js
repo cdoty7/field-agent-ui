@@ -30,7 +30,7 @@ const Agent = ({ agentId, firstName, middleName, lastName, dob, heightInInches, 
       <td>{dob}</td>
       <td>{heightInInches}</td>
       <td>
-        <Link to={`/edit/${agentId}`}><Button text="Edit" /></Link>
+        <Link to={`/agents/edit/${agentId}`}><Button text="Edit" /></Link>
         <Button text="Delete" onClick={() => deleteAgent(agentId)} />
       </td>
     </tr>

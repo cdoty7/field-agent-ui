@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import AuthContext from './AuthContext';
+import AuthContext from "./AuthContext";
+import Heading from "./Heading";
 
 const Login = () => {
     const auth = useContext(AuthContext);
@@ -27,10 +28,10 @@ const Login = () => {
   
     return (
       <div>
-        <h3>&gt; Login</h3>
+        <Heading text="> Login" />
         <form onSubmit={handleSubmit}>
         <div>
-            <label>Usernam</label>
+            <label>Username</label>
             <input type="text" onChange={(event) => setUsername(event.target.value)} />
           </div>
           <div>
